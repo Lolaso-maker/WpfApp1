@@ -8,7 +8,7 @@
         MinHeight="650"
         Background="#0B0D12"
         WindowStartupLocation="CenterScreen">
-
+    
     <Window.Resources>
 
         <!-- COLORES -->
@@ -314,7 +314,11 @@
                                 Orientation="Horizontal"
                                 VerticalAlignment="Center"
                                 Margin="20,0,0,0">
-
+                        <Button Content="Cerrar sesión"
+                            Style="{StaticResource TopButton}"
+                            Margin="14,0,0,0"
+                            Click="CerrarSesion_Click"
+                            ToolTip="Volver al inicio de sesión"/>
                         <Border Width="38"
                                 Height="38"
                                 CornerRadius="19"
@@ -328,11 +332,12 @@
                         </Border>
 
                         <StackPanel Margin="10,0,0,0">
-
-                            <TextBlock Text="Jugador"
-                                       Foreground="White"
-                                       FontWeight="SemiBold"
-                                       FontSize="13"/>
+                    
+                            <TextBlock x:Name="UserNameText"
+                                Text="Jugador"
+                                Foreground="White"
+                                FontWeight="SemiBold"
+                                FontSize="13"/>
 
                             <TextBlock Text="En línea"
                                        Foreground="#6CCB8A"

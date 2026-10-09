@@ -1,34 +1,33 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        // Constructor predeterminado.
+        public MainWindow() : this("Jugador")
+        {
+        }
+
+        // Constructor que recibe al usuario autenticado.
+        public MainWindow(string usuario)
         {
             InitializeComponent();
+
+            UserNameText.Text = usuario;
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void CerrarSesion_Click(
+            object sender,
+            RoutedEventArgs e)
         {
+            // Crear y mostrar nuevamente el login.
+            F_Login login = new F_Login();
 
-        }
+            login.Show();
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+            // Cerrar la ventana del catálogo.
+            Close();
         }
     }
 }
