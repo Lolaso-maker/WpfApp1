@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="WpfApp1.Vistas.ActividadVista"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Historial de actividad. DataContext = Modelos.Launcher -->
+
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="36,28,36,48">
+
+            <TextBlock Text="Actividad" Style="{StaticResource PageTitle}"/>
+            <TextBlock Text="Tus partidas, logros y lo que hacen tus amigos." Style="{StaticResource PageSubtitle}"/>
+
+            <WrapPanel Margin="0,24,0,8" ToggleButton.Checked="Filtro_Checked">
+                <RadioButton Style="{StaticResource Chip}" GroupName="FiltroActividad" Content="Todo" IsChecked="True"/>
+                <RadioButton Style="{StaticResource Chip}" GroupName="FiltroActividad" Content="Partidas"/>
+                <RadioButton Style="{StaticResource Chip}" GroupName="FiltroActividad" Content="Logros"/>
+                <RadioButton Style="{StaticResource Chip}" GroupName="FiltroActividad" Content="Amigos"/>
+                <RadioButton Style="{StaticResource Chip}" GroupName="FiltroActividad" Content="Sistema"/>
+            </WrapPanel>
+
+            <Border Style="{StaticResource Panel}" Padding="22,20,22,8">
+                <Grid>
+                    <ItemsControl ItemsSource="{Binding ActividadFiltrada}"
+                                  ItemTemplate="{StaticResource EntradaActividad}"/>
+
+                    <StackPanel HorizontalAlignment="Center"
+                                Margin="0,20,0,28"
+                                Visibility="{Binding ActividadVacia, Converter={StaticResource VisibleSi}}">
+                        <TextBlock Text="&#xE81C;" Style="{StaticResource Icon}" FontSize="26" Foreground="{StaticResource TextMutedBrush}"/>
+                        <TextBlock Text="Nada por aquí todavía" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+                        <TextBlock Text="Juega una partida de Buscaminas para empezar tu historial."
+                                   FontSize="13" Foreground="{StaticResource TextMutedBrush}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

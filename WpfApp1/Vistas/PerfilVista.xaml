@@ -1,0 +1,199 @@
+﻿<UserControl x:Class="WpfApp1.Vistas.PerfilVista"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Perfil: nivel, estadísticas y logros. DataContext = Modelos.Launcher -->
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="36,28,36,48">
+
+            <!-- Cabecera del perfil -->
+            <Grid>
+                <Border CornerRadius="22">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#2B1F6B" Offset="0"/>
+                            <GradientStop Color="#151A30" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border CornerRadius="22">
+                    <Border.Background>
+                        <RadialGradientBrush Center="0.9,0" GradientOrigin="0.9,0" RadiusX="0.5" RadiusY="1.2">
+                            <GradientStop Color="#557C5CFC" Offset="0"/>
+                            <GradientStop Color="#007C5CFC" Offset="1"/>
+                        </RadialGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border CornerRadius="22" BorderThickness="1" BorderBrush="#26FFFFFF"/>
+
+                <Grid Margin="32,28">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Width="96" Height="96">
+                        <Ellipse Fill="{StaticResource AccentGradient}">
+                            <Ellipse.Effect>
+                                <DropShadowEffect Color="#7C5CFC" BlurRadius="30" ShadowDepth="0" Opacity="0.6"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <TextBlock Text="{Binding Iniciales}" FontSize="38" FontWeight="Bold" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <StackPanel Grid.Column="1" Margin="26,0,0,0" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding NombreVisible}" FontSize="28" FontWeight="Bold"/>
+                            <Border Background="#33FFFFFF" CornerRadius="10" Padding="10,3" Margin="14,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Nivel, StringFormat='Nivel {0}'}" FontSize="12" FontWeight="Bold"/>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                            <Ellipse Width="8" Height="8" Fill="{StaticResource SuccessBrush}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding EstadoTexto}" FontSize="13" Foreground="#C9C2DE" Margin="8,0,0,0"/>
+                        </StackPanel>
+
+                        <Grid Margin="0,16,0,0" MaxWidth="460" HorizontalAlignment="Left">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ProgressBar Style="{StaticResource ThinProgress}" Height="8" Width="460"
+                                         Background="#33FFFFFF" Value="{Binding ProgresoNivel, Mode=OneWay}"/>
+                            <Grid Grid.Row="1" Margin="0,8,0,0">
+                                <TextBlock Text="{Binding XpTexto}" FontSize="12" Foreground="#C9C2DE"/>
+                                <TextBlock Text="Partida +10 XP · Victoria +25 XP · Logro +50 XP"
+                                           FontSize="12" Foreground="#8F88B0" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            <!-- Estadísticas -->
+            <UniformGrid Columns="4" Margin="-8,24,-8,0">
+                <Border Style="{StaticResource Panel}" Margin="8">
+                    <StackPanel>
+                        <TextBlock Text="{Binding PartidasTotales}" Style="{StaticResource StatValue}"/>
+                        <TextBlock Text="Partidas jugadas" Style="{StaticResource StatLabel}"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Panel}" Margin="8">
+                    <StackPanel>
+                        <TextBlock Text="{Binding VictoriasTotales}" Style="{StaticResource StatValue}"/>
+                        <TextBlock Text="{Binding PorcentajeVictoriasTexto, StringFormat='Victorias · {0}'}" Style="{StaticResource StatLabel}"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Panel}" Margin="8">
+                    <StackPanel>
+                        <TextBlock Text="{Binding MejorRacha}" Style="{StaticResource StatValue}"/>
+                        <TextBlock Text="{Binding RachaActual, StringFormat='Mejor racha · ahora {0}'}" Style="{StaticResource StatLabel}"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Panel}" Margin="8">
+                    <StackPanel>
+                        <TextBlock Text="{Binding TiempoJugadoTexto}" Style="{StaticResource StatValue}"/>
+                        <TextBlock Text="Tiempo jugado" Style="{StaticResource StatLabel}"/>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <!-- Por dificultad -->
+            <TextBlock Text="Buscaminas por dificultad" Style="{StaticResource SectionTitle}" Margin="0,32,0,14"/>
+            <Border Style="{StaticResource Panel}" Padding="0">
+                <StackPanel>
+                    <Grid Margin="20,14,20,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="130"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource SectionLabel}">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </Grid.Resources>
+                        <TextBlock Text="DIFICULTAD"/>
+                        <TextBlock Grid.Column="1" Text="PARTIDAS"/>
+                        <TextBlock Grid.Column="2" Text="VICTORIAS"/>
+                        <TextBlock Grid.Column="3" Text="% VICTORIAS"/>
+                        <TextBlock Grid.Column="4" Text="MEJOR TIEMPO"/>
+                    </Grid>
+                    <Rectangle Height="1" Fill="{StaticResource LineBrush}"/>
+                    <ItemsControl ItemsSource="{Binding ResumenDificultades}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="20,12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="110"/>
+                                        <ColumnDefinition Width="110"/>
+                                        <ColumnDefinition Width="110"/>
+                                        <ColumnDefinition Width="130"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Nombre}" FontSize="14" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Detalle}" FontSize="12" Foreground="{StaticResource TextMutedBrush}" Margin="0,2,0,0"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="{Binding Partidas}" FontSize="14" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding Victorias}" FontSize="14" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="3" Text="{Binding PorcentajeTexto}" FontSize="14" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="4" Text="{Binding MejorTiempoTexto}" FontSize="14" FontWeight="SemiBold"
+                                               Foreground="{StaticResource AccentLightBrush}" VerticalAlignment="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <!-- Logros -->
+            <Grid Margin="0,32,0,14">
+                <TextBlock Text="Logros" Style="{StaticResource SectionTitle}"/>
+                <TextBlock Text="{Binding LogrosTexto, StringFormat='{}{0} conseguidos'}"
+                           FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource AccentLightBrush}"
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            </Grid>
+
+            <ItemsControl ItemsSource="{Binding Logros}" Margin="-8,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="4"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border x:Name="Tarjeta" Style="{StaticResource Panel}" Margin="8" Padding="18" Opacity="0.55">
+                            <StackPanel>
+                                <Grid Width="48" Height="48" HorizontalAlignment="Left">
+                                    <Ellipse x:Name="Fondo" Fill="#1C2130" Stroke="#2A3040" StrokeThickness="1"/>
+                                    <TextBlock x:Name="Glifo" Text="{Binding Glifo}" Style="{StaticResource Icon}" FontSize="18" Foreground="#5F6679"/>
+                                </Grid>
+                                <TextBlock Text="{Binding Titulo}" FontSize="14" FontWeight="SemiBold" Margin="0,14,0,0" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="{Binding Descripcion}" FontSize="12" Foreground="{StaticResource TextMutedBrush}"
+                                           TextWrapping="Wrap" Margin="0,4,0,0" Height="32"/>
+                                <TextBlock x:Name="Fecha" Text="{Binding FechaTexto}" FontSize="11" FontWeight="SemiBold"
+                                           Foreground="{StaticResource TextMutedBrush}" Margin="0,8,0,0"/>
+                            </StackPanel>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Desbloqueado}" Value="True">
+                                <Setter TargetName="Tarjeta" Property="Opacity" Value="1"/>
+                                <Setter TargetName="Tarjeta" Property="BorderBrush" Value="#3A3270"/>
+                                <Setter TargetName="Fondo" Property="Fill" Value="{StaticResource AccentGradient}"/>
+                                <Setter TargetName="Fondo" Property="Stroke" Value="Transparent"/>
+                                <Setter TargetName="Glifo" Property="Foreground" Value="White"/>
+                                <Setter TargetName="Fecha" Property="Foreground" Value="{StaticResource AccentLightBrush}"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
