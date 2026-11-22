@@ -8,4 +8,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <!-- Conector oficial de MySQL para .NET (Práctica 3: acceso a BBDD) -->
+    <PackageReference Include="MySql.Data" Version="9.7.0" />
+  </ItemGroup>
+
 </Project>

@@ -145,15 +145,34 @@
                            MinHeight="34"
                            Margin="0,12,0,4"/>
 
-                <!-- LOGIN -->
+                <!-- LOGIN (valida contra la tabla Usuarios de MySQL) -->
 
-                <Button Content="INICIAR SESIÓN"
+                <Button x:Name="BtnLogin"
+                        Content="INICIAR SESIÓN"
                         Style="{StaticResource ActionButton}"
+                        IsDefault="True"
                         Click="BtnLogin_Click"/>
+
+                <!-- NUEVO USUARIO (alta en la tabla Usuarios) -->
+
+                <Button x:Name="BtnNuevoUsuario"
+                        Content="Nuevo usuario"
+                        Height="42"
+                        Margin="0,10,0,0"
+                        Background="Transparent"
+                        Foreground="#B9A8FF"
+                        BorderBrush="#7C5CFC"
+                        BorderThickness="1"
+                        FontSize="13"
+                        FontWeight="SemiBold"
+                        Cursor="Hand"
+                        ToolTip="Da de alta el usuario y la contraseña introducidos"
+                        Click="BtnNuevoUsuario_Click"/>
 
                 <!-- SALIR -->
 
-                <Button Content="Salir"
+                <Button x:Name="BtnSalir"
+                        Content="Salir"
                         Height="42"
                         Margin="0,10,0,0"
                         Background="#202431"
